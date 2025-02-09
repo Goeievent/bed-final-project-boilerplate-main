@@ -21,6 +21,13 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { rating, comment, userId, propertyId } = req.body;
 
+    // 🔹 Validate required fields before calling createUser
+    if (!rating) {
+      return res.status(400).json({
+        message: "Username and password are required.",
+      });
+    }
+
     const newReview = await createReview({
       rating,
       comment,

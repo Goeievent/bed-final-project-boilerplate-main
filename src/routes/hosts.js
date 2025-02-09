@@ -47,6 +47,13 @@ router.post("/", auth, async (req, res, next) => {
       aboutMe,
     } = req.body;
 
+    // 🔹 Validate required fields before calling createUser
+    if (!username || !password) {
+      return res.status(400).json({
+        message: "Username and password are required.",
+      });
+    }
+
     const newHost = await createHost(
       username,
       password,
@@ -71,7 +78,6 @@ router.post("/", auth, async (req, res, next) => {
     next(error);
   }
 });
-
 
 router.delete("/:id", auth, async (req, res, next) => {
   try {

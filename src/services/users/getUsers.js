@@ -4,7 +4,12 @@ const prisma = new PrismaClient();
 
 const getUsers = async (email, username) => {
   try {
-    console.log("Searching for users with email:", email, "and username:", username);
+    console.log(
+      "Searching for users with email:",
+      email,
+      "and username:",
+      username
+    );
 
     const users = await prisma.user.findMany({
       where: {

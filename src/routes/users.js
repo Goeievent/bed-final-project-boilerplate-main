@@ -42,6 +42,13 @@ router.post("/", auth, async (req, res, next) => {
     const { username, password, name, email, phoneNumber, profilePicture } =
       req.body;
 
+    // 🔹 Validate required fields before calling createUser
+    if (!username || !password) {
+      return res.status(400).json({
+        message: "Username and password are required.",
+      });
+    }
+
     const newUser = await createUser(
       username,
       password,
